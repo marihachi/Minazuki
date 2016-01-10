@@ -2,8 +2,8 @@
 	"mysql": {
 		"hostName": "host-name",
 		"userName": "user-name",
-        "password": "password",
-        "dbName": "database-name",
+		"password": "password",
+		"dbName": "database-name",
 		"licenseTableName": "license"
 	},
 	"secretCode": "secretcode1",
