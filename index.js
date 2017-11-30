@@ -1,21 +1,19 @@
-var express = require('express');
-var http = require('http');
-var bodyParser = require('body-parser')
-var mysql = require('mysql');
-var path = require('path');
-var responseBuilder = require('./helpers/response-builder');
-var config = require('./config');
+const express = require('express');
+const http = require('http');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+const path = require('path');
+const responseBuilder = require('./helpers/response-builder');
+const config = require('./config');
 
-var app = express();
-
-/*var connection = mysql.createConnection({
-  host : config.mysql.hostName,
-  user : config.mysql.userName,
-  password : config.mysql.password,
-  database : config.mysql.dbName,
+/*const connection = mysql.createConnection({
+	host : config.mysql.hostName,
+	user : config.mysql.userName,
+	password : config.mysql.password,
+	database : config.mysql.dbName,
 });
 
-connection.connect(function(err) {
+connection.connect((err) => {
 	if (err) {
 		console.error('database error connecting: ' + err.stack);
 		return;
@@ -23,31 +21,47 @@ connection.connect(function(err) {
 	console.log('database connected as id ' + connection.threadId);
 });*/
 
-console.log('Lisence Box');
+console.log('Simple Activation System "Minazuki"');
+
+const app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(function (req, res, next) {
-	responseBuilder.res = res;
-	res.successResponse = responseBuilder.successResponse;
-	res.errorResponse = responseBuilder.errorResponse;
-	next();
-});
-
-app.all('*', function (req, res, next) {
+// logging
+app.all('*', (req, res, next) => {
 	console.log(`${req.method} ${req.path} `);
 	next();
 });
 
-app.get('/', function (req, res) {
-	res.send('Lisence Box');
-});
+// register api endpoint
+const api = (method, path, func) => {
+	app[method](path, (req, res) => {
+		func({
+			params: req.params,
+			query: req.query,
+			body: req.body,
+			response: new ApiResponse(res)
+		});
+	});
+};
 
-app.all('/activate', require('./routes/activate'));
-app.all('/deactivate', require('./routes/deactivate'));
+// [For management] get key
+api('get', '/keys/:keyId', require('./routes/getKey'));
 
-http.createServer(app).listen(app.get('port'), function () {
-	console.log(`Start listening on port ${app.get('port')}`);
+// [For management] enable key
+api('post', '/keys/:keyId/enable', require('./routes/enableKey'));
+
+// [For management] disable key
+api('post', '/keys/:keyId/disable', require('./routes/disableKey'));
+
+// associate key with user env
+api('post', '/keys/:keyId/activate', require('./routes/activateKey'));
+
+// disassociate key with user env
+api('post', '/keys/:keyId/deactivate', require('./routes/deactivateKey'));
+
+app.listen(app.get('port'), () => {
+	console.log(`Start listening on ${app.get('port')} port`);
 });
