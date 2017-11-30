@@ -5,10 +5,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  "engines": {
-    "node": "0.10.X",
-    "npm": "1.4.X"
-  },
   "dependencies": {
     "express": "4.13.3",
     "body-parser": "*",
