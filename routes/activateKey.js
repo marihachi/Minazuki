@@ -1,15 +1,14 @@
 const generateHash = require('../modules/generateHash');
 
 module.exports = (context) => {
-	let licenseKey = '';
 	let hash = '';
 	let id = '';
 	let associateText = '';
 
-	if (context.body.licenseKey) {
-		licenseKey = context.body.license_key;
-		hash = licenseKey.substring(0, 64 - 1);
-		id = licenseKey.substring(64);
+	if (context.body.key) {
+		const key = context.body.key;
+		hash = key.substring(0, 64 - 1);
+		id = key.substring(64);
 	}
 	if (context.body.associateText) {
 		associateText = context.body.associateText;
