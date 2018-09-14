@@ -1,4 +1,4 @@
-module.exports = async (context) => {
+module.exports = async (enabled, context) => {
 
 	// param: key
 	const [key, keyErr] = $.string.get(context.params.key);
@@ -12,11 +12,9 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'key' });
 	}
 
-	// enable key
+	// update enabled
 	await context.db.updateById(context.config.mongo.collectionName, license._id, {
-		$set: {
-			enabled: true
-		}
+		$set: { enabled }
 	});
 
 	return context.response.success();

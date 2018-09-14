@@ -1,6 +1,6 @@
-const generateHash = require('../modules/generateHash');
 const $ = require('cafy').default;
 const MongoAdapter = require('../modules/MongoAdapter');
+const generateHash = require('../modules/generateHash');
 
 /** @param {{db:MongoAdapter}} context */
 module.exports = async (context) => {
@@ -46,5 +46,5 @@ module.exports = async (context) => {
 		}
 	});
 
-	return context.response.success();
+	return context.response.success({ associationHash });
 };

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node ./src/index.js"
   },
   "dependencies": {
     "basic-auth": "^2.0.0",
