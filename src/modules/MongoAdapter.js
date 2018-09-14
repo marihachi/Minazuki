@@ -67,7 +67,7 @@ class MongoAdapter {
 	 *
 	 * @param {String} collectionName
 	 * @param {Object} query
-	 * @param {{isAscending: Boolean, limit: Number, since: ObjectId, until: ObjectId}} options
+	 * @param {{isAscending: Boolean, limit: Number, since: ObjectId, until: ObjectId, skip: number}} options
 	*/
 	async findArray(collectionName, query, options) {
 		if (collectionName == null || query == null) {
@@ -75,6 +75,11 @@ class MongoAdapter {
 		}
 
 		options = options || {};
+
+		const queryOptions = {};
+		if (options.skip != null) {
+			queryOptions.skip = options.skip;
+		}
 
 		if (options.since != null || options.until != null) {
 			query._id = {};
@@ -86,7 +91,7 @@ class MongoAdapter {
 			query._id.$lt = options.until;
 		}
 
-		let cursor = this._db.collection(collectionName).find(query);
+		let cursor = this._db.collection(collectionName).find(query, queryOptions);
 
 		if (options.limit != null)
 			cursor = cursor.limit(options.limit);
