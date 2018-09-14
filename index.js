@@ -102,7 +102,7 @@ const loadConfig = () => {
 
 	adminRouter.use((req, res, next) => {
 		const authData = basicAuth(req);
-		if (!authData || config.adminAuth.username !== authData.name || config.adminAuth.password !== authData.pass) {
+		if (!authData || config.basicAuth.username !== authData.name || config.basicAuth.password !== authData.pass) {
 			res.set('WWW-Authenticate', 'Basic realm="admin area"');
 			res.status(401).send();
 			console.log('failed to authenticate admin');

@@ -4,10 +4,10 @@
 		"hostName": "host-name",
 		"dbName": "database-name",
 		"clollectionName": "licenses",
-		"username": "user-name",
+		"username": "username",
 		"password": "password"
 	},
-	"adminAuth": {
+	"basicAuth": {
 		"username": "admin",
 		"password": "your-password"
 	}
