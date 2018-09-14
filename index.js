@@ -38,7 +38,7 @@ const loadConfig = () => {
 	const dbConfig = config.mongo;
 	try {
 		db = await MongoAdapter.connect(
-			dbConfig.hostName,
+			dbConfig.hostnameWithPort,
 			dbConfig.dbName,
 			dbConfig.username,
 			dbConfig.password);
@@ -112,14 +112,14 @@ const loadConfig = () => {
 	});
 
 	const adminRoutes = [
-		// [For admin] get key
-		{ endpoint: '/admin/key/get', module: './routes/getKey' },
+		// list key
+		{ endpoint: '/key/list', module: './routes/listKey' },
 
-		// [For admin] create key
-		{ endpoint: '/admin/key/create', module: './routes/createKey' },
+		// create key
+		{ endpoint: '/key/create', module: './routes/createKey' },
 
-		// [For admin] disable key
-		{ endpoint: '/admin/key/disable', module: './routes/disableKey' }
+		// disable key
+		{ endpoint: '/key/disable', module: './routes/disableKey' }
 	];
 
 	for (const route of adminRoutes) {

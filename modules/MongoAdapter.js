@@ -196,14 +196,14 @@ class MongoAdapter {
 	/**
 	 * MongoDBに接続します
 	 *
-	 * @param {string} host
+	 * @param {string} hostnameWithPort
 	 * @param {string} dbname
 	 * @param {string?} username
 	 * @param {string?} password
 	 * @return {Promise<MongoAdapter>}
 	*/
-	static async connect(host, dbname, username, password) {
-		if (host == null || dbname == null) {
+	static async connect(hostnameWithPort, dbname, username, password) {
+		if (hostnameWithPort == null || dbname == null) {
 			throw new MissingArgumentsError();
 		}
 
@@ -212,7 +212,7 @@ class MongoAdapter {
 			authentication = `${username}:${password}@`;
 		}
 
-		const client = await MongoClient.connect(`mongodb://${authentication}${host}/${dbname}`);
+		const client = await MongoClient.connect(`mongodb://${authentication}${hostnameWithPort}/${dbname}`, { useNewUrlParser: true });
 
 		return new MongoAdapter(client, dbname);
 	}

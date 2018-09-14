@@ -11,7 +11,7 @@ module.exports = async (context) => {
 	}
 
 	// find license by key
-	const license = await context.db.find(context.config.clollectionName, { key });
+	const license = await context.db.find(context.config.mongo.collectionName, { key });
 	if (license == null) {
 		return context.response.error('invalid_param', 400, { paramName: 'key' });
 	}
@@ -40,7 +40,7 @@ module.exports = async (context) => {
 	};
 
 	// save activation of license
-	await context.db.updateById(context.config.clollectionName, license._id, {
+	await context.db.updateById(context.config.mongo.collectionName, license._id, {
 		$set: {
 			activation: license.activation
 		}
