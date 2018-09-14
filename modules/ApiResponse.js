@@ -3,16 +3,16 @@ class ApiResponse {
 		this.res = res;
 	}
 
-	success(data = null) {
+	success(content = null) {
 		const resData = { success: true };
 
-		if(typeof data === 'string') {
-			resData.message = data;
+		if(typeof content === 'string') {
+			resData.content = { message: content };
 		}
-		else if (typeof data == 'object' && !Array.isArray(data)) {
-			Object.assign(resData, data);
+		else if (typeof content == 'object' && !Array.isArray(content)) {
+			resData.content = content;
 		}
-		else if (data != null) {
+		else if (content != null) {
 			throw new TypeError('invalid response data');
 		}
 		this.res.json(resData);
