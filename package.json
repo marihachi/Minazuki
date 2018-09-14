@@ -1,13 +1,16 @@
 {
-  "name": "license-box",
+  "name": "minazuki-server",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "4.13.3",
-    "body-parser": "*",
-    "mysql": "*"
+    "basic-auth": "^2.0.0",
+    "body-parser": "^1.18.3",
+    "cafy": "^11.3.0",
+    "express": "^4.16.3",
+    "mongodb": "^3.1.4",
+    "randomstring": "^1.1.5"
   }
 }

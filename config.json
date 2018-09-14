@@ -1,11 +1,14 @@
 {
-	"mysql": {
+	"port": 3000,
+	"mongo": {
 		"hostName": "host-name",
-		"userName": "user-name",
-		"password": "password",
 		"dbName": "database-name",
-		"licenseTableName": "license"
+		"clollectionName": "licenses",
+		"username": "user-name",
+		"password": "password"
 	},
-	"secretCode": "secretcode1",
-	"secretCode2": "secretcode2"
+	"adminAuth": {
+		"username": "admin",
+		"password": "your-password"
+	}
 }

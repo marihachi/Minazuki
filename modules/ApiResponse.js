@@ -1,17 +1,10 @@
-const errorCodes = [];
-errorCodes[0] = 'Some parameters are required.';
-errorCodes[1] = 'Some parameters are invalid.';
-errorCodes[2] = 'You do not have permission.'
-errorCodes[3] = 'You were suspended.'
-errorCodes[4] = 'Internal error.';
-
 class ApiResponse {
 	constructor(res) {
 		this.res = res;
 	}
 
-	success(data) {
-		const resData = { isSuccess: true };
+	success(data = null) {
+		const resData = { success: true };
 
 		if(typeof data === 'string') {
 			resData.message = data;
@@ -19,27 +12,29 @@ class ApiResponse {
 		else if (typeof data == 'object' && !Array.isArray(data)) {
 			Object.assign(resData, data);
 		}
-		else {
+		else if (data != null) {
 			throw new TypeError('invalid response data');
 		}
-
 		this.res.json(resData);
-		console.log(`Success Response:`, resData);
+		console.log('Success Response:', resData);
 	}
 
-	error(errorCode) {
-		const resData = { isSuccess: false, errorCode };
-
-		if (errorCode >= 0 && errorCode < errorCodes.length) {
-			resData.message = errorCodes[errorCode];
-		}
-		else {
-			resData.message = 'Unknown error';
-			throw new TypeError('unknown response error code');
+	error(message, statusCode = 400, detail = null) {
+		if(typeof message !== 'string') {
+			throw new TypeError('invalid error message');
 		}
 
-		this.res.json(resData);
-		console.log('Error Response:', errorCode, resData.message);
+		const error = { message };
+		if (detail != null)
+			error.detail = detail;
+
+		const resData = {
+			success: false,
+			error: error
+		};
+
+		this.res.status(statusCode).json(resData);
+		console.log('Error Response:', statusCode, message);
 	}
 }
 module.exports = ApiResponse;
