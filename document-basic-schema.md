@@ -1,9 +1,11 @@
 # license document
-```
+```js
 {
-  enabled: boolean
+  _id: ObjectId,
+  key: string(length 24),
+  enabled: boolean,
   activation?: {
-    associationHash: string
+    associationHash: string,
     salt: number
   }
 }

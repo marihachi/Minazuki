@@ -42,5 +42,5 @@ module.exports = async (context) => {
 		activation: license.activation
 	});
 
-	return context.response.success({ associationHash });
+	return context.response.success();
 };

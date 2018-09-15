@@ -19,5 +19,9 @@ module.exports = async (context) => {
 		activation: null
 	});
 
-	return context.response.success({ key });
+	return context.response.success({
+		key: key,
+		enabled: enabled,
+		activation: null
+	});
 };
