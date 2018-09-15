@@ -1,7 +1,6 @@
 const $ = require('cafy').default;
 
 module.exports = async (enabled, context) => {
-
 	// param: key
 	const [key, keyErr] = $.string.get(context.params.key);
 	if (keyErr) {

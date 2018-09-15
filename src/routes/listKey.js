@@ -3,7 +3,6 @@ const MongoAdapter = require('../modules/MongoAdapter');
 
 /** @param {{db:MongoAdapter}} context */
 module.exports = async (context) => {
-
 	// param: page
 	const [page = 1, pageErr] = $.number.optional.min(1).get(context.params.page);
 	if (pageErr) {

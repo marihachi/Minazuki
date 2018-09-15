@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const basicAuth = require('basic-auth');
 const MongoAdapter = require('./modules/MongoAdapter');
 const ApiResponse = require('./modules/ApiResponse');
-const basicAuth = require('basic-auth');
+const loadConfig = require('./modules/loadConfig');
 
 const serverErrorHandler = (err, res) => {
 	const apiRes = new ApiResponse(res);
@@ -12,28 +13,16 @@ const serverErrorHandler = (err, res) => {
 	console.log(err);
 };
 
-const loadConfig = () => {
-	try {
-		return require('./config');
-	}
-	catch(err) {
-		try {
-			return require('../config');
-		}
-		catch(err2) {
-			throw new Error('config file is not found');
-		}
-	}
-};
-
 (async () => {
-	console.log('Simple Activation System "Minazuki"');
-	console.log();
+	console.log('-------------');
+	console.log(' Minazuki **');
+	console.log(` v${require('../package.json').version}`);
+	console.log('-------------');
 
 	console.log('loading config...');
 	const config = loadConfig();
 
-	console.log('connecting database...');
+	console.log('connecting db...');
 	let db;
 	const dbConfig = config.mongo;
 	try {
@@ -163,7 +152,7 @@ const loadConfig = () => {
 
 	// start listening
 	app.listen(config.port, () => {
-		console.log(`Start listening on ${config.port} port`);
+		console.log(`listening on port: ${config.port}`);
 	});
 })().catch(err => {
 	console.log(err);
