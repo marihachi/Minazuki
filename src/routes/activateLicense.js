@@ -16,12 +16,6 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'key' });
 	}
 
-	// param: associationText
-	const [associationText, associationTextErr] = $.string.get(context.params.associationText);
-	if (associationTextErr) {
-		return context.response.error('invalid_param', 400, { paramName: 'associationText' });
-	}
-
 	// expect: enabled
 	if (!license.enabled) {
 		return context.response.error('disabled_license');
@@ -30,6 +24,12 @@ module.exports = async (context) => {
 	// expect: not activated
 	if (license.activation != null) {
 		return context.response.error('already_activated');
+	}
+
+	// param: associationText
+	const [associationText, associationTextErr] = $.string.get(context.params.associationText);
+	if (associationTextErr) {
+		return context.response.error('invalid_param', 400, { paramName: 'associationText' });
 	}
 
 	const salt = Math.round(Math.random() * 1000000);
