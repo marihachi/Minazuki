@@ -3,7 +3,7 @@ Please use POST method in all endpoints.
 Path of the for-admin endpoints is `/admin/*`.  
 
 # Reference of api request and response
-refer to api-request-and-response.md
+Please refer to [api-request-and-response](api-request-and-response.md)
 
 # Database document schema of license
 ```js
