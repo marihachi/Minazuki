@@ -15,8 +15,8 @@
 5. config.json を編集する
 6. `npm run start`
 
-## リファレンスマニュアル
-[こちら](./reference-manual/index.md)
+## リファレンスドキュメント
+[こちら](./referenceDocuments/index.md)
 
 ## ライセンス
 このソフトウェアは MITライセンス のもとで公開されています。詳しくは [LICENSE](LICENSE) をご覧ください。
@@ -41,8 +41,8 @@ This application is developed assuming an activation server of a small-scale pro
 5. Edit config.json
 6. `npm run start`
 
-## Reference Manual
-[Here](./reference-manual/index.md)
+## Reference Documents
+[Here](./referenceDocuments/index.md)
 
 ## License
 This software is released under the MIT license. See [LICENSE](LICENSE) for details.

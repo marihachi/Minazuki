@@ -1,5 +1,5 @@
 # Reference of api request and response
-Please refer to [api-request-and-response](api-request-and-response.md)
+Please refer to [api request and response](apiRequestAndResponse.md)
 
 # Database document schema of license
 ```js
