@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "copy-config": "cp config.default.json config.json"
   },
   "dependencies": {
     "basic-auth": "^2.0.0",
