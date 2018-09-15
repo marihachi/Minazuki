@@ -13,7 +13,7 @@ module.exports = async (context) => {
 
 	const key = randomstring.generate({ length: 24 });
 
-	// create license document
+	// save
 	await context.db.create(context.config.mongo.collectionName, {
 		key: key,
 		enabled: enabled,

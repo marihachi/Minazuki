@@ -16,6 +16,7 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'limit' });
 	}
 
+	// list
 	const licenses = await context.db.findArray(context.config.mongo.collectionName, { }, { skip: limit*(page-1), limit: limit });
 
 	const serialized = licenses.map(i => {

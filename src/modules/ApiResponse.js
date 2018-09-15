@@ -9,7 +9,7 @@ class ApiResponse {
 		if(typeof content === 'string') {
 			resData.content = { message: content };
 		}
-		else if (typeof content == 'object' && !Array.isArray(content)) {
+		else if (content != null && typeof content == 'object' && !Array.isArray(content)) {
 			resData.content = content;
 		}
 		else if (content != null) {

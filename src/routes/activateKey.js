@@ -22,28 +22,24 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'associationText' });
 	}
 
-	// check that enabled of license
+	// expect: enabled
 	if (!license.enabled) {
 		return context.response.error('disabled_license');
 	}
 
-	// check that not activated
+	// expect: not activated
 	if (license.activation != null) {
 		return context.response.error('already_activated');
 	}
 
 	const salt = Math.round(Math.random() * 1000000);
+	const associationHash = generateHash(`${associationText}${salt}`);
 
-	license.activation = {
-		associationHash: generateHash(`${associationText}${salt}`),
-		salt: salt
-	};
+	license.activation = { associationHash, salt };
 
-	// save activation of license
+	// save
 	await context.db.updateById(context.config.mongo.collectionName, license._id, {
-		$set: {
-			activation: license.activation
-		}
+		activation: license.activation
 	});
 
 	return context.response.success({ associationHash });

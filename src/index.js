@@ -83,8 +83,6 @@ const loadConfig = () => {
 			Object.assign(params, req.query);
 			Object.assign(params, req.body);
 
-			console.log(params);
-
 			func({
 				config: config,
 				db: db,
@@ -112,14 +110,20 @@ const loadConfig = () => {
 	});
 
 	const adminRoutes = [
-		// list key
-		{ endpoint: '/key/list', module: './routes/listKey' },
-
 		// create key
 		{ endpoint: '/key/create', module: './routes/createKey' },
 
+		// list key
+		{ endpoint: '/key/list', module: './routes/listKey' },
+
+		// enable key
+		{ endpoint: '/key/enable', module: './routes/enableKey' },
+
 		// disable key
-		{ endpoint: '/key/disable', module: './routes/disableKey' }
+		{ endpoint: '/key/disable', module: './routes/disableKey' },
+
+		// delete key
+		{ endpoint: '/key/delete', module: './routes/deleteKey' }
 	];
 
 	for (const route of adminRoutes) {

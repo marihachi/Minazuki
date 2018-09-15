@@ -15,20 +15,8 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'key' });
 	}
 
-	// expect: enabled
-	if (!license.enabled) {
-		return context.response.error('disabled_license');
-	}
-
-	// expect: activated
-	if (license.activation == null) {
-		return context.response.error('not_activated');
-	}
-
-	// save
-	await context.db.updateById(context.config.mongo.collectionName, license._id, {
-		activation: null
-	});
+	// delete
+	await context.db.removeById(context.config.mongo.collectionName, license._id);
 
 	return context.response.success();
 };

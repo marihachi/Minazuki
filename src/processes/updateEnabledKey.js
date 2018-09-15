@@ -1,3 +1,5 @@
+const $ = require('cafy').default;
+
 module.exports = async (enabled, context) => {
 
 	// param: key
@@ -14,7 +16,7 @@ module.exports = async (enabled, context) => {
 
 	// update enabled
 	await context.db.updateById(context.config.mongo.collectionName, license._id, {
-		$set: { enabled }
+		enabled
 	});
 
 	return context.response.success();
