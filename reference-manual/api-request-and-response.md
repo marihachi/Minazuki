@@ -1,4 +1,8 @@
-# /admin/key/create
+# Description
+Please use POST method in all endpoints.  
+`for-admin` endpoints require Basic Authentication.  
+
+# /license/create (for-admin)
 ## request params
 ```json
 { }
@@ -8,14 +12,16 @@
 {
 	"success": true,
 	"content": {
-		"key": "lug6zApuG3wN6ewdHhfefppZ",
-		"enabled": true,
-		"activation": null
+		"license": {
+			"key": "lug6zApuG3wN6ewdHhfefppZ",
+			"enabled": true,
+			"activated": false
+		}
 	}
 }
 ```
 
-# /admin/key/list
+# /license/list (for-admin)
 ## request params
 ```json
 { }
@@ -25,18 +31,18 @@
 {
 	"success": true,
 	"content": {
-		"keys": [
+		"licenses": [
 			{
 				"key": "lug6zApuG3wN6ewdHhfefppZ",
 				"enabled": true,
-				"activation": null
+				"activated": false
 			}
 		]
 	}
 }
 ```
 
-# /admin/key/enable
+# /license/enable (for-admin)
 ## request params
 ```json
 {
@@ -50,7 +56,7 @@
 }
 ```
 
-# /admin/key/disable
+# /license/disable (for-admin)
 ## request params
 ```json
 {
@@ -64,7 +70,7 @@
 }
 ```
 
-# /admin/key/delete
+# /license/delete (for-admin)
 ## request params
 ```json
 {
@@ -78,7 +84,7 @@
 }
 ```
 
-# /key/activate
+# /license/activate
 ## request params
 ```json
 {
@@ -93,7 +99,7 @@
 }
 ```
 
-# /key/deactivate
+# /license/deactivate
 ## request params
 ```json
 {
@@ -104,5 +110,30 @@
 ```json
 {
 	"success": true
+}
+```
+
+# /license/check
+## request params
+```json
+{
+	"key": "5JhoL6J5TbyjkV00ZBUrpzgF",
+	"associationText": "hoge"
+}
+```
+## response
+### Successfully
+```json
+{
+	"success": true
+}
+```
+### If different associationText
+```json
+{
+	"success": false,
+	"error": {
+		"message": "different_association_text"
+	}
 }
 ```

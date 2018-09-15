@@ -57,11 +57,14 @@ const serverErrorHandler = (err, res) => {
 	const router = express.Router();
 
 	const routes = [
-		// associate key with user env
-		{ endpoint: '/key/activate', module: './routes/activateKey' },
+		// associate license-key with user env
+		{ endpoint: '/license/activate', module: './routes/activateLicense' },
 
-		// disassociate key with user env
-		{ endpoint: '/key/deactivate', module: './routes/deactivateKey' }
+		// disassociate license-key with user env
+		{ endpoint: '/license/deactivate', module: './routes/deactivateLicense' },
+
+		// check activation state
+		{ endpoint: '/license/check', module: './routes/checkLicense' },
 	];
 
 	for (const route of routes) {
@@ -99,20 +102,20 @@ const serverErrorHandler = (err, res) => {
 	});
 
 	const adminRoutes = [
-		// create key
-		{ endpoint: '/key/create', module: './routes/createKey' },
+		// create license
+		{ endpoint: '/license/create', module: './routes/createLicense' },
 
-		// list key
-		{ endpoint: '/key/list', module: './routes/listKey' },
+		// list license
+		{ endpoint: '/license/list', module: './routes/listLicense' },
 
-		// enable key
-		{ endpoint: '/key/enable', module: './routes/enableKey' },
+		// enable license
+		{ endpoint: '/license/enable', module: './routes/enableLicense' },
 
-		// disable key
-		{ endpoint: '/key/disable', module: './routes/disableKey' },
+		// disable license
+		{ endpoint: '/license/disable', module: './routes/disableLicense' },
 
-		// delete key
-		{ endpoint: '/key/delete', module: './routes/deleteKey' }
+		// delete license
+		{ endpoint: '/license/delete', module: './routes/deleteLicense' }
 	];
 
 	for (const route of adminRoutes) {
@@ -138,7 +141,7 @@ const serverErrorHandler = (err, res) => {
 
 	app.use(router);
 
-	app.use('/admin', adminRouter);
+	app.use(adminRouter);
 
 	app.use((req, res) => {
 		const apiRes = new ApiResponse(res);

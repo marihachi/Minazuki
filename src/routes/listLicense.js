@@ -22,9 +22,9 @@ module.exports = async (context) => {
 		return {
 			key: i.key,
 			enabled: i.enabled,
-			activation: i.activation
+			activated: (i.activation != null)
 		};
 	});
 
-	return context.response.success({ keys: serialized });
+	return context.response.success({ licenses: serialized });
 };

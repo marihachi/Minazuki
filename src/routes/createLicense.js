@@ -20,8 +20,10 @@ module.exports = async (context) => {
 	});
 
 	return context.response.success({
-		key: key,
-		enabled: enabled,
-		activation: null
+		license: {
+			key: key,
+			enabled: enabled,
+			activated: false
+		}
 	});
 };
