@@ -10,7 +10,7 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'enabled' });
 	}
 
-	const key = randomstring.generate({ length: 24 });
+	const key = randomstring.generate({ length: context.config.licenseKeyLength });
 
 	// save
 	await context.db.create(context.config.mongo.collectionName, {

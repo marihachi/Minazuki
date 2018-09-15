@@ -12,5 +12,6 @@
 		"username": "admin",
 		"password": "set-your-password"
 	},
-	"defaultLicenseEnabled": true
+	"defaultLicenseEnabled": true,
+	"licenseKeyLength": 24
 }
