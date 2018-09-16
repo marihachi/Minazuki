@@ -25,11 +25,8 @@ module.exports = (config, db) => {
 	// admin authentication
 	router.use((req, res, next) => {
 		if (req.body.username || req.body.password) {
-			const validCredential = (
-				req.body.username === config.basicAuth.username &&
-				req.body.password === config.basicAuth.password);
-
-			if (!validCredential) {
+			if (req.body.username !== config.basicAuth.username ||
+				req.body.password !== config.basicAuth.password) {
 				res.status(401).send();
 				console.log('failed to authenticate admin');
 				return;
@@ -37,12 +34,9 @@ module.exports = (config, db) => {
 		}
 		else {
 			const authData = basicAuth(req);
-			const validCredential = (
-				authData &&
-				config.basicAuth.username === authData.name &&
-				config.basicAuth.password === authData.pass);
-
-			if (!validCredential) {
+			if (!authData ||
+				config.basicAuth.username !== authData.name ||
+				config.basicAuth.password !== authData.pass) {
 				res.set('WWW-Authenticate', 'Basic realm="admin area"');
 				res.status(401).send();
 				console.log('failed to authenticate admin');
