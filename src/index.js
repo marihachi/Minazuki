@@ -49,11 +49,11 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 
 	// general router
 	const generalRouter = buildGeneralRouter(config, db);
-	server.use(generalRouter);
+	server.use('/', generalRouter);
 
 	// admin router
 	const adminRouter = buildAdminRouter(config, db);
-	server.use(adminRouter);
+	server.use('/admin', adminRouter);
 
 	// error: not found
 	server.use((req, res) => {
