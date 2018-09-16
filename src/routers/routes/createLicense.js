@@ -1,5 +1,5 @@
 const $ = require('cafy').default;
-const MongoAdapter = require('../modules/MongoAdapter');
+const MongoAdapter = require('../../modules/MongoAdapter');
 const randomstring = require('randomstring');
 
 /** @param {{db:MongoAdapter}} context */

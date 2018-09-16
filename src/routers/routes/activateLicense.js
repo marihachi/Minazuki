@@ -1,6 +1,6 @@
 const $ = require('cafy').default;
-const MongoAdapter = require('../modules/MongoAdapter');
-const generateHash = require('../modules/generateHash');
+const MongoAdapter = require('../../modules/MongoAdapter');
+const generateHash = require('../../modules/generateHash');
 
 /** @param {{db:MongoAdapter}} context */
 module.exports = async (context) => {
@@ -21,9 +21,9 @@ module.exports = async (context) => {
 		return context.response.error('disabled_license');
 	}
 
-	// expect: activated
-	if (license.activation == null) {
-		return context.response.error('not_activated');
+	// expect: not activated
+	if (license.activation != null) {
+		return context.response.error('already_activated');
 	}
 
 	// param: associationText
@@ -32,12 +32,15 @@ module.exports = async (context) => {
 		return context.response.error('invalid_param', 400, { paramName: 'associationText' });
 	}
 
-	const correctAssociationHash = generateHash(`${associationText}${license.activation.salt}`);
-	
-	// expect: associationText equals to it was saved
-	if (license.activation.associationHash != correctAssociationHash) {
-		return context.response.error('different_association_text');
-	}
+	const salt = Math.round(Math.random() * 1000000);
+	const associationHash = generateHash(`${associationText}${salt}`);
+
+	license.activation = { associationHash, salt };
+
+	// save
+	await context.db.updateById(context.config.mongo.collectionName, license._id, {
+		activation: license.activation
+	});
 
 	return context.response.success();
 };

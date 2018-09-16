@@ -1,4 +1,4 @@
-const updateEnabledLicense = require('../processes/updateEnabledLicense');
+const updateEnabledLicense = require('./processes/updateEnabledLicense');
 
 /** @param {{db:MongoAdapter}} context */
 module.exports = (context) => {

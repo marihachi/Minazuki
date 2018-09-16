@@ -1,5 +1,5 @@
 const $ = require('cafy').default;
-const MongoAdapter = require('../modules/MongoAdapter');
+const MongoAdapter = require('../../modules/MongoAdapter');
 
 /** @param {{db:MongoAdapter}} context */
 module.exports = async (context) => {

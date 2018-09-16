@@ -1,5 +1,6 @@
 const $ = require('cafy').default;
-const MongoAdapter = require('../modules/MongoAdapter');
+const MongoAdapter = require('../../modules/MongoAdapter');
+const generateHash = require('../../modules/generateHash');
 
 /** @param {{db:MongoAdapter}} context */
 module.exports = async (context) => {
@@ -25,10 +26,18 @@ module.exports = async (context) => {
 		return context.response.error('not_activated');
 	}
 
-	// save
-	await context.db.updateById(context.config.mongo.collectionName, license._id, {
-		activation: null
-	});
+	// param: associationText
+	const [associationText, associationTextErr] = $.string.get(context.params.associationText);
+	if (associationTextErr) {
+		return context.response.error('invalid_param', 400, { paramName: 'associationText' });
+	}
+
+	const correctAssociationHash = generateHash(`${associationText}${license.activation.salt}`);
+	
+	// expect: associationText equals to it was saved
+	if (license.activation.associationHash != correctAssociationHash) {
+		return context.response.error('different_association_text');
+	}
 
 	return context.response.success();
 };

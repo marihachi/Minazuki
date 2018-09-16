@@ -16,7 +16,6 @@ class ApiResponse {
 			throw new TypeError('invalid response data');
 		}
 		this.res.json(resData);
-		console.log('Success Response:', resData);
 	}
 
 	error(message, statusCode = 400, detail = null) {
@@ -34,7 +33,6 @@ class ApiResponse {
 		};
 
 		this.res.status(statusCode).json(resData);
-		console.log('Error Response:', statusCode, message);
 	}
 }
 module.exports = ApiResponse;

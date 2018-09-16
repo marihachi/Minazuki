@@ -1,5 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb');
-const { MissingArgumentsError } = require('./errors');
+const { MissingArgumentsError } = require('./Errors');
 
 class MongoAdapter {
 	/**
@@ -26,7 +26,7 @@ class MongoAdapter {
 			throw new MissingArgumentsError();
 		}
 
-		const result = await this._db.collection(collectionName).insert(data);
+		const result = await this._db.collection(collectionName).insertOne(data);
 		const document = await this.find(collectionName, { _id: result.ops[0]._id });
 
 		return document;
@@ -203,11 +203,11 @@ class MongoAdapter {
 	 *
 	 * @param {string} hostnameWithPort
 	 * @param {string} dbname
-	 * @param {string?} username
-	 * @param {string?} password
+	 * @param {string} username
+	 * @param {string} password
 	 * @return {Promise<MongoAdapter>}
 	*/
-	static async connect(hostnameWithPort, dbname, username, password) {
+	static async connect(hostnameWithPort, dbname, username = null, password = null) {
 		if (hostnameWithPort == null || dbname == null) {
 			throw new MissingArgumentsError();
 		}
