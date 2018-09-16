@@ -1,7 +1,7 @@
 # Description
 Please use POST method in all endpoints.  
 `for-admin` endpoints require Basic Authentication.  
-All parameters please give in JSON format(`application/json` Content-Type) from request body.  
+Please give all parameters to request body in JSON format(`application/json` Content-Type).  
 
 # Index of API docs
 ### for-apps
