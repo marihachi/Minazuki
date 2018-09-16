@@ -1,69 +1,79 @@
 # Description
 Please use POST method in all endpoints.  
 `for-admin` endpoints require Basic Authentication.  
+All parameters please give in JSON format(`application/json` Content-Type) from request body.  
 
 # Index of API docs
-### general
-- [/license/activate](#license-activate)
-- [/license/deactivate](#license-deactivate)
-- [/license/check](#license-check)
+### for-apps
+- [Activate license](#license-activate)
+- [Deactivate license](#license-deactivate)
+- [Check license](#license-check)
 ### for-admin
-- [/license/create](#license-create)
-- [/license/list](#license-list)
-- [/license/enable](#license-enable)
-- [/license/disable](#license-disable)
-- [/license/delete](#license-delete)
+- [Create license](#license-create)
+- [List licenses](#license-list)
+- [Enable license](#license-enable)
+- [Disable license](#license-disable)
+- [Delete license](#license-delete)
 
-# general endpoints
+# for-apps endpoints
 
-<h2 id="license-activate">/license/activate</h2>
+<h2 id="license-activate">Activate license</h2>
 
-### request params
+### Request example
+```
+POST /license/activate
+```
 ```json
 {
 	"key": "lug6zApuG3wN6ewdHhfefppZ",
 	"associationText": "hoge"
 }
 ```
-### response
+### Response example
 ```json
 {
 	"success":true
 }
 ```
 
-<h2 id="license-deactivate">/license/deactivate</h2>
+<h2 id="license-deactivate">Deactivate license</h2>
 
-### request params
+### Request example
+```
+POST /license/deactivate
+```
 ```json
 {
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-### response
+### Response example
 ```json
 {
 	"success": true
 }
 ```
 
-<h2 id="license-check">/license/check</h2>
+<h2 id="license-check">Check license</h2>
 
-### request params
+### Request example
+```
+POST /license/check
+```
 ```json
 {
 	"key": "5JhoL6J5TbyjkV00ZBUrpzgF",
 	"associationText": "hoge"
 }
 ```
-### response
-### Successfully
+### Response example
+Successfully
 ```json
 {
 	"success": true
 }
 ```
-### If different associationText
+If different associationText
 ```json
 {
 	"success": false,
@@ -77,11 +87,14 @@ Please use POST method in all endpoints.
 
 <h2 id="license-create">/license/create (for-admin)</h2>
 
-### request params
+### Request example
+```
+POST /license/check
+```
 ```json
 { }
 ```
-### response
+### Response example
 ```json
 {
 	"success": true,
@@ -93,13 +106,16 @@ Please use POST method in all endpoints.
 }
 ```
 
-<h2 id="license-list">/license/list (for-admin)</h2>
+<h2 id="license-list">List licenses (for-admin)</h2>
 
-### request params
+### Request example
+```
+POST /license/list
+```
 ```json
 { }
 ```
-### response
+### Response example
 ```json
 {
 	"success": true,
@@ -113,45 +129,54 @@ Please use POST method in all endpoints.
 }
 ```
 
-<h2 id="license-enable">/license/enable (for-admin)</h2>
+<h2 id="license-enable">Enable license (for-admin)</h2>
 
-### request params
+### Request example
+```
+POST /license/enable
+```
 ```json
 {
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-### response
+### Response example
 ```json
 {
 	"success": true
 }
 ```
 
-<h2 id="license-disable">/license/disable (for-admin)</h2>
+<h2 id="license-disable">Disable license (for-admin)</h2>
 
-### request params
+### Request example
+```
+POST /license/disable
+```
 ```json
 {
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-### response
+### Response example
 ```json
 {
 	"success": true
 }
 ```
 
-<h2 id="license-delete">/license/delete (for-admin)</h2>
+<h2 id="license-delete">Delete license (for-admin)</h2>
 
-### request params
+### Request example
+```
+POST /license/delete
+```
 ```json
 {
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-#### response
+#### Response example
 ```json
 {
 	"success": true
