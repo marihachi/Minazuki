@@ -15,11 +15,16 @@ Please give all parameters to request body in JSON format(`application/json` Con
 - [Disable license](#license-disable)
 - [Delete license](#license-delete)
 
-# for-apps endpoints
+----
+## for-apps endpoints
+----
 
-<h2 id="license-activate">Activate license</h2>
+<h1 id="license-activate">Activate license</h1>
 
-### Request example
+## Description
+Activate by associating the association-text with the license-key.
+
+## Request example
 ```
 POST /license/activate
 ```
@@ -29,16 +34,19 @@ POST /license/activate
 	"associationText": "hoge"
 }
 ```
-### Response example
+## Response example
 ```json
 {
 	"success":true
 }
 ```
 
-<h2 id="license-deactivate">Deactivate license</h2>
+<h1 id="license-deactivate">Deactivate license</h1>
 
-### Request example
+## Description
+Deactivate the license by remove the associating-text.
+
+## Request example
 ```
 POST /license/deactivate
 ```
@@ -47,16 +55,19 @@ POST /license/deactivate
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-### Response example
+## Response example
 ```json
 {
 	"success": true
 }
 ```
 
-<h2 id="license-check">Check license</h2>
+<h1 id="license-check">Check license</h1>
 
-### Request example
+## Description
+Check the activation status of license, and verify association-text.
+
+## Request example
 ```
 POST /license/check
 ```
@@ -66,7 +77,7 @@ POST /license/check
 	"associationText": "hoge"
 }
 ```
-### Response example
+## Response example
 Successfully
 ```json
 {
@@ -83,18 +94,23 @@ If different associationText
 }
 ```
 
-# for-admin endpoints
+----
+## for-admin endpoints
+----
 
-<h2 id="license-create">/license/create (for-admin)</h2>
+<h1 id="license-create">Create license (for-admin)</h1>
 
-### Request example
+## Description
+Create a license and get the license key.
+
+## Request example
 ```
 POST /license/check
 ```
 ```json
 { }
 ```
-### Response example
+## Response example
 ```json
 {
 	"success": true,
@@ -106,16 +122,19 @@ POST /license/check
 }
 ```
 
-<h2 id="license-list">List licenses (for-admin)</h2>
+<h1 id="license-list">List licenses (for-admin)</h1>
 
-### Request example
+## Description
+Get a list of licenses.
+
+## Request example
 ```
 POST /license/list
 ```
 ```json
 { }
 ```
-### Response example
+## Response example
 ```json
 {
 	"success": true,
@@ -129,9 +148,12 @@ POST /license/list
 }
 ```
 
-<h2 id="license-enable">Enable license (for-admin)</h2>
+<h1 id="license-enable">Enable license (for-admin)</h1>
 
-### Request example
+## Description
+Make the license operable by the user. (Unsuspend license)
+
+## Request example
 ```
 POST /license/enable
 ```
@@ -140,16 +162,19 @@ POST /license/enable
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-### Response example
+## Response example
 ```json
 {
 	"success": true
 }
 ```
 
-<h2 id="license-disable">Disable license (for-admin)</h2>
+<h1 id="license-disable">Disable license (for-admin)</h1>
 
-### Request example
+## Description
+Make the license not operable by the user. (Suspend license)
+
+## Request example
 ```
 POST /license/disable
 ```
@@ -158,16 +183,19 @@ POST /license/disable
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-### Response example
+## Response example
 ```json
 {
 	"success": true
 }
 ```
 
-<h2 id="license-delete">Delete license (for-admin)</h2>
+<h1 id="license-delete">Delete license (for-admin)</h1>
 
-### Request example
+## Description
+Delete the license.
+
+## Request example
 ```
 POST /license/delete
 ```
@@ -176,7 +204,7 @@ POST /license/delete
 	"key": "lug6zApuG3wN6ewdHhfefppZ"
 }
 ```
-#### Response example
+## Response example
 ```json
 {
 	"success": true
