@@ -39,7 +39,6 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 	const server = express();
 	server.set('port', process.env.PORT || 3000);
 	server.disable('x-powered-by');
-	server.use(bodyParser.urlencoded({ extended: true }));
 	server.use(bodyParser.json());
 
 	// logging

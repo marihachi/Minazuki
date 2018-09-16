@@ -14,14 +14,10 @@ module.exports = (config, db, routes, router = null) => {
 		const func = require(path.resolve(__dirname, 'routes', route.module));
 
 		router.post(route.endpoint, (req, res) => {
-			const params = {};
-			Object.assign(params, req.query);
-			Object.assign(params, req.body);
-
 			func({
 				config: config,
 				db: db,
-				params: params,
+				params: req.body,
 				response: new ApiResponse(res)
 			}).catch(err => {
 				serverErrorHandler(err, res);
