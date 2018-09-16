@@ -31,6 +31,9 @@ POST /license/activate
 }
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success":true
@@ -52,6 +55,9 @@ POST /license/deactivate
 }
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success": true
@@ -75,12 +81,18 @@ POST /license/check
 ```
 ## Response example
 Successfully
+```
+200 OK
+```
 ```json
 {
 	"success": true
 }
 ```
 If different associationText
+```
+400 Bad Request
+```
 ```json
 {
 	"success": false,
@@ -100,9 +112,13 @@ Create a license and get the license key.
 POST /license/check
 ```
 ```json
-{ }
+{
+}
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success": true,
@@ -124,9 +140,13 @@ Get a list of licenses.
 POST /license/list
 ```
 ```json
-{ }
+{
+}
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success": true,
@@ -155,6 +175,9 @@ POST /license/enable
 }
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success": true
@@ -176,6 +199,9 @@ POST /license/disable
 }
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success": true
@@ -197,6 +223,9 @@ POST /license/delete
 }
 ```
 ## Response example
+```
+200 OK
+```
 ```json
 {
 	"success": true
