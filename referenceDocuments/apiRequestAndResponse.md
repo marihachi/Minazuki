@@ -15,10 +15,6 @@ Please give all parameters to request body in JSON format(`application/json` Con
 - [Disable license](#license-disable)
 - [Delete license](#license-delete)
 
-----
-## for-apps endpoints
-----
-
 <h1 id="license-activate">Activate license</h1>
 
 ## Description
@@ -93,10 +89,6 @@ If different associationText
 	}
 }
 ```
-
-----
-## for-admin endpoints
-----
 
 <h1 id="license-create">Create license (for-admin)</h1>
 
