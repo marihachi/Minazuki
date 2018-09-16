@@ -85,12 +85,10 @@ Please use POST method in all endpoints.
 ```json
 {
 	"success": true,
-	"content": {
-		"license": {
-			"key": "lug6zApuG3wN6ewdHhfefppZ",
-			"enabled": true,
-			"activated": false
-		}
+	"license": {
+		"key": "lug6zApuG3wN6ewdHhfefppZ",
+		"enabled": true,
+		"activated": false
 	}
 }
 ```
@@ -105,15 +103,13 @@ Please use POST method in all endpoints.
 ```json
 {
 	"success": true,
-	"content": {
-		"licenses": [
-			{
-				"key": "lug6zApuG3wN6ewdHhfefppZ",
-				"enabled": true,
-				"activated": false
-			}
-		]
-	}
+	"licenses": [
+		{
+			"key": "lug6zApuG3wN6ewdHhfefppZ",
+			"enabled": true,
+			"activated": false
+		}
+	]
 }
 ```
 
