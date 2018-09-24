@@ -7,6 +7,7 @@
   "scripts": {
     "copy-static": "cpx src/client/static/* src/client.built",
     "build": "npm run copy-static && webpack --mode production",
+    "build-dev": "npm run copy-static && webpack --mode development",
     "start": "node ./src/index.js",
     "copy-config": "cp config.default.json config.json"
   },
@@ -29,6 +30,7 @@
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.17",
-    "webpack": "^4.19.1"
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
   }
 }
