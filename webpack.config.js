@@ -28,35 +28,36 @@ const languageConfigs = Object.keys(i18nTable).map(langName => {
 			rules: [
 				{
 					test: /\.vue$/,
-					loaders: [
+					use: [
 						{ loader: 'vue-loader' },
 						{
 							loader: 'string-replace-loader',
-							options: {
-								multiple: i18n(langName)
-							}
+							options: { multiple: i18n(langName) }
 						}
 					]
 				},
 				{
 					test: /\.scss$/,
 					use: [
-						'vue-style-loader',
-						'css-loader',
-						'sass-loader'
+						{ loader: 'vue-style-loader' },
+						{ loader: 'css-loader' },
+						{ loader: 'sass-loader' }
 					]
 				},
 				{
 					test: /\.js$/,
-					loader: 'babel-loader?presets=es2015',
-				},
+					use: [
+						{
+							loader: 'babel-loader',
+							options: { presets: 'es2015' }
+						}
+					]
+				}
 			]
 		},
 		resolve: {
 			extensions: ['.js', '.vue'],
-			alias: {
-				vue$: 'vue/dist/vue.esm.js',
-			}
+			alias: { vue$: 'vue/dist/vue.esm.js', }
 		},
 		plugins: [
 			new VueLoaderPlugin()
