@@ -5,5 +5,5 @@ class MissingArgumentsError extends Error {
 }
 
 module.exports = {
-    MissingArgumentsError
+	MissingArgumentsError
 };

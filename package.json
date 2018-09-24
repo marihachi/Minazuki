@@ -1,7 +1,7 @@
 {
+  "private": true,
   "name": "minazuki-server",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "start": "node ./src/index.js",
     "copy-config": "cp config.default.json config.json"
