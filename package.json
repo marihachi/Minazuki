@@ -26,6 +26,7 @@
     "node-sass": "^4.9.3",
     "randomstring": "^1.1.5",
     "sass-loader": "^7.1.0",
+    "string-replace-loader": "^2.1.1",
     "vue": "^2.5.17",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
