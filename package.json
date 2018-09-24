@@ -2,16 +2,33 @@
   "private": true,
   "name": "minazuki-server",
   "version": "0.0.0",
+  "author": "Marihachi",
+  "license": "MIT",
   "scripts": {
+    "copy-static": "cpx src/client/static/* src/client.built",
+    "build": "npm run copy-static && webpack --mode production",
     "start": "node ./src/index.js",
     "copy-config": "cp config.default.json config.json"
   },
   "dependencies": {
-    "basic-auth": "^2.0.0",
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "basic-auth": "^2.0.1",
     "body-parser": "^1.18.3",
     "cafy": "^11.3.0",
+    "cpx": "^1.5.0",
+    "css-loader": "^1.0.0",
     "express": "^4.16.3",
-    "mongodb": "^3.1.4",
-    "randomstring": "^1.1.5"
+    "mongodb": "^3.1.6",
+    "node-sass": "^4.9.3",
+    "randomstring": "^1.1.5",
+    "sass-loader": "^7.1.0",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.19.1"
   }
 }

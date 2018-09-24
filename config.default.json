@@ -13,5 +13,6 @@
 		"password": "set-your-password"
 	},
 	"defaultLicenseEnabled": true,
-	"licenseKeyLength": 24
+	"licenseKeyLength": 24,
+	"enableAdminWeb": true
 }

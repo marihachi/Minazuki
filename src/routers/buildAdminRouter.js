@@ -46,5 +46,7 @@ module.exports = (config, db) => {
 		next();
 	});
 
+	router.use(express.static('src/client.built'));
+
 	return buildRouter(config, db, routes, router);
 };

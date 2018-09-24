@@ -51,9 +51,11 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 	const generalRouter = buildGeneralRouter(config, db);
 	server.use('/', generalRouter);
 
-	// admin router
-	const adminRouter = buildAdminRouter(config, db);
-	server.use('/admin', adminRouter);
+	if (config.enableAdminWeb) {
+		// admin router
+		const adminRouter = buildAdminRouter(config, db);
+		server.use('/admin', adminRouter);
+	}
 
 	// error: not found
 	server.use((req, res) => {
