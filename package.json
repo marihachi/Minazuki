@@ -5,11 +5,11 @@
   "author": "Marihachi",
   "license": "MIT",
   "scripts": {
-    "copy-static": "cpx src/client/static/* src/client.built",
-    "build": "npm run copy-static && webpack --mode production",
-    "build-dev": "npm run copy-static && webpack --mode development",
-    "start": "node ./src/index.js",
-    "copy-config": "cp config.default.json config.json"
+    "copy-config": "cp config.default.json config.json",
+    "_copy-static": "cpx src/client/static/* src/client.built",
+    "build": "npm run _copy-static && webpack --mode production",
+    "build-dev": "npm run _copy-static && webpack --mode development",
+    "start": "node ./src/index.js"
   },
   "dependencies": {
     "babel": "^6.23.0",
