@@ -13,7 +13,8 @@
 3. `npm i`
 4. `npm run copy-config`
 5. config.json を編集する
-6. `npm run start`
+6. `npm run build`
+7. `npm run start`
 
 ## リファレンスドキュメント
 [こちら](./referenceDocuments/index.md)
@@ -39,7 +40,8 @@ This application is developed assuming an activation server of a small-scale pro
 3. `npm i`
 4. `npm run copy-config`
 5. Edit config.json
-6. `npm run start`
+6. `npm run build`
+7. `npm run start`
 
 ## Reference Documents
 [Here](./referenceDocuments/index.md)
