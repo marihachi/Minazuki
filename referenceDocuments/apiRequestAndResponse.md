@@ -20,6 +20,12 @@ Please give all parameters to request body in JSON format(`application/json` Con
 ## Description
 Activate by associating the association-text with the license-key.
 
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+key | string | true | -
+associationText | string | true | -
+
 ## Request example
 ```
 POST /license/activate
@@ -45,6 +51,11 @@ POST /license/activate
 ## Description
 Deactivate the license by remove the associating-text.
 
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+key | string | true | -
+
 ## Request example
 ```
 POST /license/deactivate
@@ -68,6 +79,12 @@ POST /license/deactivate
 
 ## Description
 Check the activation status of license, and verify association-text.
+
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+key | string | true | -
+associationText | string | true | -
 
 ## Request example
 ```
@@ -107,9 +124,12 @@ If different associationText
 ## Description
 Create a license and get the license key.
 
+## Parameters
+There are no parameters.
+
 ## Request example
 ```
-POST /license/check
+POST /license/create
 ```
 ```json
 {
@@ -134,6 +154,12 @@ POST /license/check
 
 ## Description
 Get a list of licenses.
+
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+page | number | false | 1
+limit | number | false | 30
 
 ## Request example
 ```
@@ -165,6 +191,11 @@ POST /license/list
 ## Description
 Make the license operable by the user. (Unsuspend license)
 
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+key | string | true | -
+
 ## Request example
 ```
 POST /license/enable
@@ -189,6 +220,11 @@ POST /license/enable
 ## Description
 Make the license not operable by the user. (Suspend license)
 
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+key | string | true | -
+
 ## Request example
 ```
 POST /license/disable
@@ -212,6 +248,11 @@ POST /license/disable
 
 ## Description
 Delete the license.
+
+## Parameters
+Name | Type | Required | DefaultValue
+---- | ---- | ---- | ----
+key | string | true | -
 
 ## Request example
 ```
