@@ -5,13 +5,17 @@ const i18nTable = {
 		'LicenseManagement': 'ライセンスの管理',
 		'Create': '作成',
 		'Delete': '削除',
-		'Reload': 'リロード'
+		'Reload': 'リロード',
+		'Enable': '有効化',
+		'Disable': '無効化'
 	},
 	'en': {
 		'LicenseManagement': 'License Management',
 		'Create': 'Create',
 		'Delete': 'Delete',
-		'Reload': 'Reload'
+		'Reload': 'Reload',
+		'Enable': 'Enable',
+		'Disable': 'Disable'
 	}
 };
 

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="app-scope">
 		<p>Minazuki admin page</p>
 
 		<h2>{%LicenseManagement%}</h2>
@@ -8,7 +8,11 @@
 		<button @click="listLicenses()">{%Reload%}</button>
 		<ul>
 			<li v-for="license in licenses" :key="license.key">
-				key: {{ license.key }}
+				<p>key: {{ license.key }}</p>
+				<p>enabled: {{ license.enabled }}</p>
+				<p>activated: {{ license.activated }}</p>
+				<button v-if="license.enabled" @click="disableLicense(license)">{%Disable%}</button>
+				<button v-else @click="enableLicense(license)">{%Enable%}</button>
 				<button @click="deleteLicense(license)">{%Delete%}</button>
 			</li>
 		</ul>
@@ -77,6 +81,38 @@
 					alert(`request error: ${err.message || err}`);
 				}
 			},
+			async enableLicense(license) {
+				try {
+					const res = await callApi('/admin/license/enable', {
+						key: license.key
+					});
+					if (!res.success) {
+						alert('api error:', res.error.message);
+						return;
+					}
+					// enable
+					license.enabled = true;
+				}
+				catch (err) {
+					alert(`request error: ${err.message || err}`);
+				}
+			},
+			async disableLicense(license) {
+				try {
+					const res = await callApi('/admin/license/disable', {
+						key: license.key
+					});
+					if (!res.success) {
+						alert('api error:', res.error.message);
+						return;
+					}
+					// disable
+					license.enabled = false;
+				}
+				catch (err) {
+					alert(`request error: ${err.message || err}`);
+				}
+			}
 		},
 		created() {
 			this.listLicenses();
@@ -85,5 +121,22 @@
 </script>
 
 <style lang="scss" scoped>
+.app-scope {
+	margin: 1rem;
 
+	ul {
+		padding: 0;
+
+		li {
+			list-style: none;
+			border: 1px solid rgb(155, 155, 155);
+			padding: 1rem;
+			margin: 1rem 0;
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+}
 </style>
