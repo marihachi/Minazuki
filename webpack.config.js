@@ -2,12 +2,16 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const i18nTable = {
 	'ja': {
-		'License Creation': 'ライセンスの作成',
-		'Create': '作成'
+		'LicenseManagement': 'ライセンスの管理',
+		'Create': '作成',
+		'Delete': '削除',
+		'Reload': 'リロード'
 	},
 	'en': {
-		'License Creation': 'License Creation',
-		'Create': 'Create'
+		'LicenseManagement': 'License Management',
+		'Create': 'Create',
+		'Delete': 'Delete',
+		'Reload': 'Reload'
 	}
 };
 
