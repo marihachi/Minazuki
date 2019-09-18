@@ -176,7 +176,7 @@ class MongoAdapter {
 			throw new MissingArgumentsError();
 		}
 
-		await this._db.collection(collectionName).remove(query, options);
+		await this._db.collection(collectionName).deleteOne(query, options);
 	}
 
 	removeById(collectionName, id, options) {
