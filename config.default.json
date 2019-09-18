@@ -14,5 +14,6 @@
 	},
 	"defaultLicenseEnabled": true,
 	"licenseKeyLength": 24,
-	"enableAdminWeb": true
+	"enableAdminWeb": true,
+	"sessionSecret": "set-your-session-secret"
 }

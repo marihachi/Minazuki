@@ -1,6 +1,10 @@
 const express = require('express');
 const basicAuth = require('basic-auth');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const csurf = require('csurf');
 const buildRouter = require('./buildRouter');
+const ApiResponse = require('../modules/ApiResponse');
 
 module.exports = (config, db) => {
 	const routes = [
@@ -21,6 +25,19 @@ module.exports = (config, db) => {
 	];
 
 	const router = express.Router();
+	router.use(session({
+		store: new MongoStore({
+			client: db._client
+		}),
+		secret: config.sessionSecret,
+		cookie: {
+			httpOnly: true,
+			maxAge: 7 * 24 * 60 * 60 * 1000 // 7days
+		},
+		resave: false,
+		saveUninitialized: false
+	}));
+	router.use(csurf());
 
 	// admin authentication
 	router.use((req, res, next) => {
@@ -46,7 +63,20 @@ module.exports = (config, db) => {
 		next();
 	});
 
+	router.get('/', (req, res) => {
+		res.render('adminManage', {
+			csrf: req.csrfToken()
+		});
+	});
+
 	router.use(express.static('src/client.built'));
+
+	// error: csrf token
+	router.use((err, req, res, next) => {
+		if (err.code !== 'EBADCSRFTOKEN') return next(err);
+		const apiRes = new ApiResponse(res);
+		apiRes.error(err.message);
+	});
 
 	return buildRouter(config, db, routes, router);
 };

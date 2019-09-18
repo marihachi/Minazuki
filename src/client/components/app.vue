@@ -20,7 +20,8 @@
 </template>
 
 <script>
-	async function callApi(path, params = {}) {
+	async function callApi(path, csrfToken, params = {}) {
+		params._csrf = csrfToken;
 		const resRaw = await fetch(path, {
 			method: 'post',
 			headers: {
@@ -40,7 +41,7 @@
 		methods: {
 			async createLicense() {
 				try {
-					const res = await callApi('/admin/license/create');
+					const res = await callApi('/admin/license/create', this.$root.csrfToken);
 					if (!res.success) {
 						alert('api error:', res.error.message);
 						return;
@@ -53,7 +54,7 @@
 			},
 			async listLicenses() {
 				try {
-					const res = await callApi('/admin/license/list');
+					const res = await callApi('/admin/license/list', this.$root.csrfToken);
 					if (!res.success) {
 						alert('api error:', res.error.message);
 						return;
@@ -66,7 +67,7 @@
 			},
 			async deleteLicense(license) {
 				try {
-					const res = await callApi('/admin/license/delete', {
+					const res = await callApi('/admin/license/delete', this.$root.csrfToken, {
 						key: license.key
 					});
 					if (!res.success) {
@@ -83,7 +84,7 @@
 			},
 			async enableLicense(license) {
 				try {
-					const res = await callApi('/admin/license/enable', {
+					const res = await callApi('/admin/license/enable', this.$root.csrfToken, {
 						key: license.key
 					});
 					if (!res.success) {
@@ -99,7 +100,7 @@
 			},
 			async disableLicense(license) {
 				try {
-					const res = await callApi('/admin/license/disable', {
+					const res = await callApi('/admin/license/disable', this.$root.csrfToken, {
 						key: license.key
 					});
 					if (!res.success) {

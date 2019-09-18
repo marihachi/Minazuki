@@ -1,19 +1,17 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf8">
-		<title>admin page</title>
-	</head>
-	<body style="margin: 0">
-		<noscript>Please allow to execute JavaScript</noscript>
-		<div id="app"></div>
-		<script>
+doctype html
+html
+	head
+		meta(charset="utf8")
+		meta(name='csrf', content=csrf)
+		title admin page
+
+	body(style="margin: 0")
+		noscript Please allow to execute JavaScript
+		#app
+		script.
 			var lang=(window.navigator.languages&&window.navigator.languages[0])||window.navigator.language||window.navigator.userLanguage||window.navigator.browserLanguage;
 			var id='en';
 			if(lang=='ja')id='ja';
 			var el=document.createElement('script');
 			el.setAttribute('src','./minazuki.'+id+'.js');
 			document.body.appendChild(el);
-		</script>
-	</body>
-</html>

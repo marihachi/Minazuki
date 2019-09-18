@@ -1,3 +1,4 @@
+const path = require('path');
 const loadConfig = require('./modules/loadConfig');
 const MongoAdapter = require('./modules/MongoAdapter');
 const express = require('express');
@@ -38,6 +39,8 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 
 	const server = express();
 	server.set('port', process.env.PORT || 3000);
+	server.set('views', path.join(__dirname, 'views'));
+	server.set('view engine', 'pug');
 	server.disable('x-powered-by');
 	server.use(bodyParser.json());
 
