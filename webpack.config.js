@@ -1,5 +1,29 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const bootloader = {
+	entry: './src/client/bootloader.js',
+	output: {
+		path: `${__dirname}/src/client.built`,
+		filename: `bootloader.js`
+	},
+	module: {
+		rules: [
+			{
+				test: /\.js$/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: { presets: 'es2015' }
+					}
+				]
+			}
+		]
+	},
+	resolve: {
+		extensions: ['.js']
+	},
+};
+
 const i18nTable = {
 	'ja': {
 		'LicenseManagement': 'ライセンスの管理',
@@ -73,4 +97,4 @@ const languageConfigs = Object.keys(i18nTable).map(langName => {
 	};
 });
 
-module.exports = languageConfigs;
+module.exports = [bootloader, ...languageConfigs];

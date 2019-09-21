@@ -8,6 +8,10 @@ if (csrfMeta) {
 	csrfToken = csrfMeta.content;
 }
 
+const appElement = document.createElement('div');
+appElement.setAttribute('id', 'app');
+document.body.appendChild(appElement);
+
 new Vue({
 	el: '#app',
 	data() {
@@ -18,3 +22,9 @@ new Vue({
 	components: { app },
 	template: '<app />'
 });
+
+document.body.setAttribute('style', 'margin: 0');
+
+const titleElement = document.createElement('title');
+titleElement.innerText = 'admin page';
+document.head.appendChild(titleElement);
