@@ -5,7 +5,7 @@ const randomstring = require('randomstring');
 /** @param {{db:MongoAdapter}} context */
 module.exports = async (context) => {
 	// param: enabled
-	const [enabled = context.config.defaultLicenseEnabled, enabledErr] = $.boolean.optional.get(context.params.enabled);
+	const [enabled = context.config.defaultLicenseEnabled, enabledErr] = $.optional.boolean.get(context.params.enabled);
 	if (enabledErr) {
 		return context.response.error('invalid_param', 400, { paramName: 'enabled' });
 	}

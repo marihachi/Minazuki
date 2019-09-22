@@ -217,7 +217,10 @@ class MongoAdapter {
 			authentication = `${username}:${password}@`;
 		}
 
-		const client = await MongoClient.connect(`mongodb://${authentication}${hostnameWithPort}/${dbname}`, { useNewUrlParser: true });
+		const client = await MongoClient.connect(`mongodb://${authentication}${hostnameWithPort}/${dbname}`, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true
+		});
 
 		return new MongoAdapter(client, dbname);
 	}
