@@ -21,15 +21,17 @@ export default {
 	methods: {
 		async login() {
 			try {
-				const res = await callApi('/admin/token/check', {
-					token: this.token
+				const res = await callApi('/admin/license/list', {
+					token: this.token,
+					limit: 0
 				});
 				if (!res.success) {
-					alert('api error:', res.error.message);
-					return;
-				}
-				if (!res.content.correct) {
-					alert('incorrect credentials');
+					if (res.error.message == 'not_authenticated') {
+						alert('incorrect credentials');
+					}
+					else {
+						alert('api error:', res.error.message);
+					}
 					return;
 				}
 				localStorage.setItem('token', this.token);
