@@ -1,30 +1,27 @@
 import Vue from 'vue';
-import app from './components/app';
-
-// csrf token
-const csrfMeta = document.getElementsByName('csrf').item(0);
-let csrfToken = null;
-if (csrfMeta) {
-	csrfToken = csrfMeta.content;
-}
+import VueRouter from 'vue-router';
+import App from './components/app';
+import routes from './routes';
 
 const appElement = document.createElement('div');
 appElement.setAttribute('id', 'app');
 document.body.appendChild(appElement);
 
+const router = new VueRouter({
+	mode: 'history',
+	routes: routes()
+});
+
+Vue.use(VueRouter);
 new Vue({
 	el: '#app',
-	data() {
-		return {
-			csrfToken
-		};
-	},
-	components: { app },
-	template: '<app />'
+	router,
+	components: { App },
+	template: '<App />'
 });
 
 document.body.setAttribute('style', 'margin: 0');
 
 const titleElement = document.createElement('title');
-titleElement.innerText = 'admin page';
+titleElement.innerText = 'Minazuki';
 document.head.appendChild(titleElement);

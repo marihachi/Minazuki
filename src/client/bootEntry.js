@@ -7,8 +7,7 @@ let id = 'en';
 if (lang == 'ja') {
 	id = 'ja';
 }
-
 const scriptElement = document.createElement('script');
-scriptElement.setAttribute('src', `/admin/minazuki.${id}.js`);
+scriptElement.setAttribute('src', `/resources/minazuki.${id}.js`);
 scriptElement.setAttribute('defer', '');
 document.head.appendChild(scriptElement);
