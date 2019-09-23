@@ -10,49 +10,37 @@
 </template>
 
 <script>
-	async function callApi(path, params = {}) {
-		const resRaw = await fetch(path, {
-			method: 'post',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(params)
-		});
-		const res = await resRaw.json();
-		return res;
-	}
-	export default {
-		data() {
-			return {
-				token: ''
-			};
-		},
-		methods: {
-			async login() {
-				try {
-					const res = await callApi('/admin/token/check', {
-						token: this.token
-					});
-					if (!res.success) {
-						alert('api error:', res.error.message);
-						return;
-					}
-					if (!res.content.correct) {
-						alert('incorrect credentials');
-						return;
-					}
-					localStorage.setItem('token', this.token);
-					this.$root.$data.token = this.token;
-				}
-				catch (err) {
-					alert(`request error: ${err.message || err}`);
-				}
-			}
-		},
-		created() {
+import callApi from '../modules/callApi';
 
+export default {
+	data() {
+		return {
+			token: ''
+		};
+	},
+	methods: {
+		async login() {
+			try {
+				const res = await callApi('/admin/token/check', {
+					token: this.token
+				});
+				if (!res.success) {
+					alert('api error:', res.error.message);
+					return;
+				}
+				if (!res.content.correct) {
+					alert('incorrect credentials');
+					return;
+				}
+				localStorage.setItem('token', this.token);
+				this.$root.$data.token = this.token;
+			}
+			catch (err) {
+				alert(`request error: ${err.message || err}`);
+			}
 		}
-	};
+	}
+};
 </script>
 
 <style lang="scss" scoped>

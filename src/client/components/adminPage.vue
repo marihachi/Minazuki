@@ -20,104 +20,98 @@
 </template>
 
 <script>
-	async function callApi(path, params = {}) {
-		const resRaw = await fetch(path, {
-			method: 'post',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(params)
-		});
-		const res = await resRaw.json();
-		return res;
-	}
-	export default {
-		data() {
-			return {
-				licenses: []
-			};
-		},
-		methods: {
-			async createLicense() {
-				try {
-					const res = await callApi('/admin/license/create');
-					if (!res.success) {
-						alert('api error:', res.error.message);
-						return;
-					}
-					this.licenses.push(res.content.license);
+import callApi from '../modules/callApi';
+
+function callAdminApi(vueInstance, path, params = {}) {
+	params.token = vueInstance.$root.$data.token;
+	return callApi(path, params);
+}
+
+export default {
+	data() {
+		return {
+			licenses: []
+		};
+	},
+	methods: {
+		async createLicense() {
+			try {
+				const res = await callAdminApi(this, '/admin/license/create');
+				if (!res.success) {
+					alert('api error:', res.error.message);
+					return;
 				}
-				catch (err) {
-					alert(`request error: ${err.message || err}`);
-				}
-			},
-			async listLicenses() {
-				try {
-					const res = await callApi('/admin/license/list');
-					if (!res.success) {
-						alert('api error:', res.error.message);
-						return;
-					}
-					this.licenses = res.content.licenses;
-				}
-				catch (err) {
-					alert(`request error: ${err.message || err}`);
-				}
-			},
-			async deleteLicense(license) {
-				try {
-					const res = await callApi('/admin/license/delete', {
-						key: license.key
-					});
-					if (!res.success) {
-						alert('api error:', res.error.message);
-						return;
-					}
-					// remove the item from the license list
-					const licenseIndex = this.licenses.findIndex(it => it.key == license.key);
-					this.licenses.splice(licenseIndex, 1);
-				}
-				catch (err) {
-					alert(`request error: ${err.message || err}`);
-				}
-			},
-			async enableLicense(license) {
-				try {
-					const res = await callApi('/admin/license/enable', {
-						key: license.key
-					});
-					if (!res.success) {
-						alert('api error:', res.error.message);
-						return;
-					}
-					// enable
-					license.enabled = true;
-				}
-				catch (err) {
-					alert(`request error: ${err.message || err}`);
-				}
-			},
-			async disableLicense(license) {
-				try {
-					const res = await callApi('/admin/license/disable', {
-						key: license.key
-					});
-					if (!res.success) {
-						alert('api error:', res.error.message);
-						return;
-					}
-					// disable
-					license.enabled = false;
-				}
-				catch (err) {
-					alert(`request error: ${err.message || err}`);
-				}
+				this.licenses.push(res.content.license);
+			}
+			catch (err) {
+				alert(`request error: ${err.message || err}`);
 			}
 		},
-		created() {
-			this.listLicenses();
+		async listLicenses() {
+			try {
+				const res = await callAdminApi(this, '/admin/license/list');
+				if (!res.success) {
+					alert('api error:', res.error.message);
+					return;
+				}
+				this.licenses = res.content.licenses;
+			}
+			catch (err) {
+				alert(`request error: ${err.message || err}`);
+			}
+		},
+		async deleteLicense(license) {
+			try {
+				const res = await callAdminApi(this, '/admin/license/delete', {
+					key: license.key
+				});
+				if (!res.success) {
+					alert('api error:', res.error.message);
+					return;
+				}
+				// remove the item from the license list
+				const licenseIndex = this.licenses.findIndex(it => it.key == license.key);
+				this.licenses.splice(licenseIndex, 1);
+			}
+			catch (err) {
+				alert(`request error: ${err.message || err}`);
+			}
+		},
+		async enableLicense(license) {
+			try {
+				const res = await callAdminApi(this, '/admin/license/enable', {
+					key: license.key
+				});
+				if (!res.success) {
+					alert('api error:', res.error.message);
+					return;
+				}
+				license.enabled = true;
+			}
+			catch (err) {
+				alert(`request error: ${err.message || err}`);
+			}
+		},
+		async disableLicense(license) {
+			try {
+				const res = await callAdminApi(this, '/admin/license/disable', {
+					key: license.key
+				});
+				if (!res.success) {
+					alert('api error:', res.error.message);
+					return;
+				}
+				license.enabled = false;
+			}
+			catch (err) {
+				alert(`request error: ${err.message || err}`);
+			}
 		}
-	};
+	},
+	created() {
+		this.listLicenses();
+	}
+};
 </script>
 
 <style lang="scss" scoped>
