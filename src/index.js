@@ -8,7 +8,7 @@ const serverErrorHandler = require('./modules/serverErrorHandler');
 const buildGeneralRouter = require('./routers/buildGeneralRouter');
 const buildAdminRouter = require('./routers/buildAdminRouter');
 
-(async () => {
+async function entryPoint() {
 	console.log('-------------');
 	console.log(' Minazuki **');
 	console.log(` v${require('../package.json').version}`);
@@ -16,7 +16,14 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 
 	console.log('loading config...');
 
-	const config = loadConfig();
+	let config;
+	try {
+		config = loadConfig();
+	}
+	catch (err) {
+		console.log('failed to load config');
+		return;
+	}
 	if (config.$version != 2) {
 		console.log(`The config version '${config.$version}' is not supported. You need to use the version 2.`);
 		return;
@@ -86,7 +93,9 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 	server.listen(config.httpPort, () => {
 		console.log(`listening on port: ${config.httpPort}`);
 	});
+}
 
-})().catch(err => {
+entryPoint()
+.catch(err => {
 	console.log(err);
 });
