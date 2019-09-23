@@ -1,10 +1,37 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+/* -- i18n -- */
+
+const i18nTable = {
+	ja: {
+		LicenseManagement: 'ライセンスの管理',
+		Create: '作成',
+		Delete: '削除',
+		Reload: 'リロード',
+		Enable: '有効化',
+		Disable: '無効化'
+	},
+	en: {
+		LicenseManagement: 'License Management',
+		Create: 'Create',
+		Delete: 'Delete',
+		Reload: 'Reload',
+		Enable: 'Enable',
+		Disable: 'Disable'
+	}
+};
+
+const i18n = (langName) => {
+	return Object.keys(i18nTable[langName]).map(word => {
+		return { search: `{%${word}%}`, replace: i18nTable[langName][word] };
+	});
+};
+
 const bootloader = {
-	entry: './src/client/bootloader.js',
+	entry: './src/client/bootEntry.js',
 	output: {
-		path: `${__dirname}/src/client.built`,
-		filename: `bootloader.js`
+		path: `${__dirname}/src/client.built/resources`,
+		filename: `minazuki.js`
 	},
 	module: {
 		rules: [
@@ -24,36 +51,11 @@ const bootloader = {
 	},
 };
 
-const i18nTable = {
-	'ja': {
-		'LicenseManagement': 'ライセンスの管理',
-		'Create': '作成',
-		'Delete': '削除',
-		'Reload': 'リロード',
-		'Enable': '有効化',
-		'Disable': '無効化'
-	},
-	'en': {
-		'LicenseManagement': 'License Management',
-		'Create': 'Create',
-		'Delete': 'Delete',
-		'Reload': 'Reload',
-		'Enable': 'Enable',
-		'Disable': 'Disable'
-	}
-};
-
-const i18n = (langName) => {
-	return Object.keys(i18nTable[langName]).map(word => {
-		return { search: `{%${word}%}`, replace: i18nTable[langName][word] };
-	});
-};
-
-const languageConfigs = Object.keys(i18nTable).map(langName => {
+const configs = Object.keys(i18nTable).map(langName => {
 	return {
-		entry: './src/client/entry.js',
+		entry: './src/client/mainEntry.js',
 		output: {
-			path: `${__dirname}/src/client.built`,
+			path: `${__dirname}/src/client.built/resources`,
 			filename: `minazuki.${langName}.js`
 		},
 		module: {
@@ -97,4 +99,4 @@ const languageConfigs = Object.keys(i18nTable).map(langName => {
 	};
 });
 
-module.exports = [bootloader, ...languageConfigs];
+module.exports = [bootloader, ...configs];

@@ -1,13 +1,11 @@
 <template>
 	<div class="login-scope">
 		<p>Login</p>
-		<form>
-			<label for="token">
-				Admin Token:
-				<input type="password" id="token" required v-model="token">
-			</label>
-			<button @click="login(token)">
-		</form>
+		<label for="token">
+			Admin Token:
+			<input type="password" id="token" required v-model="token">
+		</label>
+		<button @click="login()">login</button>
 	</div>
 </template>
 
@@ -32,12 +30,19 @@
 		methods: {
 			async login() {
 				try {
-					const res = await callApi('/admin/token/check');
+					const res = await callApi('/admin/token/check', {
+						token: this.token
+					});
 					if (!res.success) {
 						alert('api error:', res.error.message);
 						return;
 					}
-					console.log(`correct: ${res.content.correct}`);
+					if (!res.content.correct) {
+						alert('incorrect credentials');
+						return;
+					}
+					localStorage.setItem('token', this.token);
+					this.$root.$data.token = this.token;
 				}
 				catch (err) {
 					alert(`request error: ${err.message || err}`);

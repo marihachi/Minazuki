@@ -12,10 +12,17 @@ const router = new VueRouter({
 	routes: routes()
 });
 
+const token = localStorage.getItem('token');
+
 Vue.use(VueRouter);
 new Vue({
 	el: '#app',
 	router,
+	data() {
+		return {
+			token: token
+		};
+	},
 	components: { App },
 	template: '<App />'
 });
