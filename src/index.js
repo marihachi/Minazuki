@@ -17,6 +17,10 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 	console.log('loading config...');
 
 	const config = loadConfig();
+	if (config.$version != 2) {
+		console.log(`The config version '${config.$version}' is not supported. You need to use the version 2.`);
+		return;
+	}
 
 	console.log('connecting db...');
 
@@ -38,9 +42,6 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 	console.log('initializing...');
 
 	const server = express();
-	server.set('port', process.env.PORT || 3000);
-	server.set('views', path.join(__dirname, 'views'));
-	server.set('view engine', 'pug');
 	server.disable('x-powered-by');
 	server.use(bodyParser.json());
 
@@ -50,20 +51,30 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 		next();
 	});
 
+	// static resource
+	server.use('/', express.static('src/client.built'));
+
 	// general router
 	const generalRouter = buildGeneralRouter(config, db);
 	server.use('/', generalRouter);
 
-	if (config.enableAdminWeb) {
-		// admin router
-		const adminRouter = buildAdminRouter(config, db);
-		server.use('/admin', adminRouter);
-	}
+	// admin router
+	const adminRouter = buildAdminRouter(config, db);
+	server.use('/admin', adminRouter);
 
 	// error: not found
 	server.use((req, res) => {
 		const apiRes = new ApiResponse(res);
 		apiRes.error('not_found', 404);
+	});
+
+	server.use((err, req, res, next) => {
+		if (err instanceof SyntaxError && err.message.indexOf('JSON') != -1) {
+			const apiRes = new ApiResponse(res);
+			apiRes.error('invalid_request', 400);
+			return;
+		}
+		next();
 	});
 
 	// error handling
@@ -72,8 +83,8 @@ const buildAdminRouter = require('./routers/buildAdminRouter');
 	});
 
 	// start listening
-	server.listen(config.port, () => {
-		console.log(`listening on port: ${config.port}`);
+	server.listen(config.httpPort, () => {
+		console.log(`listening on port: ${config.httpPort}`);
 	});
 
 })().catch(err => {

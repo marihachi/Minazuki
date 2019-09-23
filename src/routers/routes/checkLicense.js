@@ -11,7 +11,7 @@ module.exports = async (context) => {
 	}
 
 	// find license by key
-	const license = await context.db.find(context.config.mongo.collectionName, { key });
+	const license = await context.db.find(context.config.mongo.collectionNames.licenses, { key });
 	if (license == null) {
 		return context.response.error('invalid_param', 400, { paramName: 'key' });
 	}

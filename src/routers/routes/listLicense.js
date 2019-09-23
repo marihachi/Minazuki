@@ -10,13 +10,18 @@ module.exports = async (context) => {
 	}
 
 	// param: limit
-	const [limit = 30, limitErr] = $.optional.number.range(1, 1000).get(context.params.limit);
+	const [limit = 30, limitErr] = $.optional.number.range(0, 1000).get(context.params.limit);
 	if (limitErr) {
 		return context.response.error('invalid_param', 400, { paramName: 'limit' });
 	}
 
-	// list
-	const licenses = await context.db.findArray(context.config.mongo.collectionName, { }, { skip: limit*(page-1), limit: limit });
+	let licenses;
+	if (limit != 0) {
+		licenses = await context.db.findArray(context.config.mongo.collectionNames.licenses, { }, { skip: limit*(page-1), limit: limit });
+	}
+	else {
+		licenses = [];
+	}
 
 	const serialized = licenses.map(i => {
 		return {
