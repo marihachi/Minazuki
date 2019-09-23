@@ -38,7 +38,7 @@ export default {
 			try {
 				const res = await callAdminApi(this, '/admin/license/create');
 				if (!res.success) {
-					alert('api error:', res.error.message);
+					alert(`api error: ${res.error.message}`);
 					return;
 				}
 				this.licenses.push(res.content.license);
@@ -51,7 +51,7 @@ export default {
 			try {
 				const res = await callAdminApi(this, '/admin/license/list');
 				if (!res.success) {
-					alert('api error:', res.error.message);
+					alert(`api error: ${res.error.message}`);
 					return;
 				}
 				this.licenses = res.content.licenses;
@@ -66,7 +66,7 @@ export default {
 					key: license.key
 				});
 				if (!res.success) {
-					alert('api error:', res.error.message);
+					alert(`api error: ${res.error.message}`);
 					return;
 				}
 				// remove the item from the license list
@@ -83,7 +83,7 @@ export default {
 					key: license.key
 				});
 				if (!res.success) {
-					alert('api error:', res.error.message);
+					alert(`api error: ${res.error.message}`);
 					return;
 				}
 				license.enabled = true;
@@ -98,7 +98,7 @@ export default {
 					key: license.key
 				});
 				if (!res.success) {
-					alert('api error:', res.error.message);
+					alert(`api error: ${res.error.message}`);
 					return;
 				}
 				license.enabled = false;

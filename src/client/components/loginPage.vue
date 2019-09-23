@@ -30,7 +30,7 @@ export default {
 						alert('incorrect credentials');
 					}
 					else {
-						alert('api error:', res.error.message);
+						alert(`api error: ${res.error.message}`);
 					}
 					return;
 				}

@@ -26,7 +26,7 @@ async function init() {
 			tokenLength = parseInt(tokenLengthStr, 10);
 		}
 	}
-	while ($.number.int().range(1, 128).nok(tokenLength));
+	while ($.number.int().range(1, 1024).nok(tokenLength));
 
 	const token = randomstring.generate(tokenLength);
 
