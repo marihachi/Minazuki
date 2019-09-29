@@ -1,5 +1,7 @@
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const configs = [];
+
 /* -- i18n -- */
 
 const i18nTable = {
@@ -27,10 +29,10 @@ const i18n = (langName) => {
 	});
 };
 
-const bootloader = {
+configs.push({
 	entry: './src/client/bootEntry.js',
 	output: {
-		path: `${__dirname}/src/client.built/resources`,
+		path: `${__dirname}/src/client.built/assets`,
 		filename: `minazuki.js`
 	},
 	module: {
@@ -49,13 +51,13 @@ const bootloader = {
 	resolve: {
 		extensions: ['.js']
 	},
-};
+});
 
-const configs = Object.keys(i18nTable).map(langName => {
+configs.push(...Object.keys(i18nTable).map(langName => {
 	return {
 		entry: './src/client/mainEntry.js',
 		output: {
-			path: `${__dirname}/src/client.built/resources`,
+			path: `${__dirname}/src/client.built/assets`,
 			filename: `minazuki.${langName}.js`
 		},
 		module: {
@@ -79,6 +81,13 @@ const configs = Object.keys(i18nTable).map(langName => {
 					]
 				},
 				{
+					test: /\.css$/,
+					use: [
+						{ loader: 'vue-style-loader' },
+						{ loader: 'css-loader' }
+					]
+				},
+				{
 					test: /\.js$/,
 					use: [
 						{
@@ -90,13 +99,13 @@ const configs = Object.keys(i18nTable).map(langName => {
 			]
 		},
 		resolve: {
-			extensions: ['.js', '.vue'],
+			extensions: ['.js'],
 			alias: { vue$: 'vue/dist/vue.esm.js', }
 		},
 		plugins: [
 			new VueLoaderPlugin()
 		]
 	};
-});
+}));
 
-module.exports = [bootloader, ...configs];
+module.exports = configs;

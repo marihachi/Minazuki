@@ -23,6 +23,12 @@ module.exports = (config, db) => {
 
 	const router = express.Router();
 
+	if (config.adminWeb.enable) {
+		router.get('/*', (req, res) => {
+			res.render('page');
+		});
+	}
+
 	// admin authentication
 	router.use((req, res, next) => {
 		const token = req.body.token;
@@ -33,12 +39,6 @@ module.exports = (config, db) => {
 		}
 		next();
 	});
-
-	if (config.adminWeb.enable) {
-		router.get('/*', (req, res) => {
-			res.render('page');
-		});
-	}
 
 	return buildRouter(config, db, routes, router);
 };

@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import App from './components/app';
+import App from './components/app.vue';
 import routes from './routes';
+
+import './resources/normalize.css';
+import './resources/skeleton.css';
 
 const appElement = document.createElement('div');
 appElement.setAttribute('id', 'app');

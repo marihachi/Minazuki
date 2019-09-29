@@ -1,5 +1,5 @@
-import adminRoute from './admin';
-import notFoundRoute from './notfound';
+import adminRoute from './admin.vue';
+import notFoundRoute from './notfound.vue';
 
 export default function() {
 	return [

@@ -1,0 +1,16 @@
+doctype html
+html
+	head
+		meta(charset="utf8")
+		script.
+			var lang = (window.navigator.languages && window.navigator.languages[0]) || window.navigator.language || window.navigator.userLanguage || window.navigator.browserLanguage;
+			var id = 'en';
+			if (lang == 'ja') id = 'ja';
+			var scriptElement = document.createElement('script');
+			scriptElement.setAttribute('src', '/assets/minazuki.'+id+'.js');
+			scriptElement.setAttribute('defer', '');
+			document.head.appendChild(scriptElement);
+
+	body
+		noscript
+			p Please allow to execute JavaScript.<br />JavaScriptの実行を許可してください。

@@ -5,8 +5,8 @@
 	</div>
 </template>
 <script>
-import adminPage from '../components/adminPage';
-import loginPage from '../components/loginPage';
+import adminPage from '../components/adminPage.vue';
+import loginPage from '../components/loginPage.vue';
 
 export default {
 	computed: {

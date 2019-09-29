@@ -1,7 +1,7 @@
-const path = require('path');
 const loadConfig = require('./modules/loadConfig');
 const MongoAdapter = require('./modules/MongoAdapter');
 const express = require('express');
+const compression = require('compression');
 const bodyParser = require('body-parser');
 const ApiResponse = require('./modules/ApiResponse');
 const serverErrorHandler = require('./modules/serverErrorHandler');
@@ -50,6 +50,14 @@ async function entryPoint() {
 
 	const server = express();
 	server.disable('x-powered-by');
+	server.set('view engine', 'pug');
+	server.set('views', 'src/views');
+
+	server.use(compression({
+		threshold: 0,
+		level: 9,
+		memLevel: 9
+	}));
 	server.use(bodyParser.json());
 
 	// logging
