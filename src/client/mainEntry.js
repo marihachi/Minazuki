@@ -3,13 +3,15 @@ import VueRouter from 'vue-router';
 import App from './components/app.vue';
 import routes from './routes';
 import { library as faLibrary } from '@fortawesome/fontawesome-svg-core';
-import { faComments } from '@fortawesome/free-solid-svg-icons/faComments';
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons/faSyncAlt';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import './resources/normalize.css';
 import './resources/skeleton.css';
 
-faLibrary.add(faComments);
+faLibrary.add(faPlus);
+faLibrary.add(faSyncAlt);
 Vue.component('v-fa', FontAwesomeIcon);
 
 const appElement = document.createElement('div');
