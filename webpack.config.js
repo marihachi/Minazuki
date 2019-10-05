@@ -29,30 +29,6 @@ const i18n = (langName) => {
 	});
 };
 
-configs.push({
-	entry: './src/client/bootEntry.js',
-	output: {
-		path: `${__dirname}/src/client.built/assets`,
-		filename: `minazuki.js`
-	},
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: { presets: 'es2015' }
-					}
-				]
-			}
-		]
-	},
-	resolve: {
-		extensions: ['.js']
-	},
-});
-
 configs.push(...Object.keys(i18nTable).map(langName => {
 	return {
 		entry: './src/client/mainEntry.js',
@@ -90,10 +66,7 @@ configs.push(...Object.keys(i18nTable).map(langName => {
 				{
 					test: /\.js$/,
 					use: [
-						{
-							loader: 'babel-loader',
-							options: { presets: 'es2015' }
-						}
+						{ loader: 'babel-loader' }
 					]
 				}
 			]
